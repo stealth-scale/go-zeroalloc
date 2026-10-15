@@ -1,0 +1,7 @@
+# Managed by ergon init. Add repository settings to .ergon/local/.github/ISSUE_TEMPLATE/config.yml and run ergon init sync.
+
+blank_issues_enabled: false
+contact_links:
+  - name: Report a vulnerability
+    url: https://github.com/stealth-scale/go-zeroalloc/security/advisories/new
+    about: Report a vulnerability privately, as SECURITY.md describes. Do not open a public issue for it.

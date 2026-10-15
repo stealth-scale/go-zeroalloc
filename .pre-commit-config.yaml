@@ -1,0 +1,63 @@
+# Managed by ergon init. Add repository settings to .ergon/local/.pre-commit-config.yaml and run ergon init sync.
+#
+# Install the hooks with: pre-commit install
+
+default_install_hook_types: [pre-commit, commit-msg, pre-push]
+default_stages: [pre-commit]
+
+repos:
+  # File hygiene, without a language toolchain, at the release of the section common of
+  # .ergon.yaml, before each commit. pre-commit-hooks declares three of these hooks for the stage
+  # pre-push as well, so this configuration limits each of them to the stage pre-commit.
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: '\.md$'
+        stages: [pre-commit]
+      - id: end-of-file-fixer
+        stages: [pre-commit]
+      - id: mixed-line-ending
+        args: ["--fix=lf"]
+      - id: check-merge-conflict
+      - id: detect-private-key
+      - id: check-added-large-files
+        args: ["--maxkb=500"]
+        stages: [pre-commit]
+      - id: check-yaml
+        args: ["--allow-multiple-documents"]
+      - id: check-json
+      - id: check-toml
+      - id: check-symlinks
+
+  - repo: local
+    hooks:
+      # Each commit runs the targets of the Makefile that common.hooks.pre-commit of .ergon.yaml
+      # lists.
+      - id: lint
+        name: make lint
+        entry: make lint
+        language: system
+        pass_filenames: false
+      - id: test
+        name: make test
+        entry: make test
+        language: system
+        pass_filenames: false
+
+      # Each push runs the targets of the Makefile that common.hooks.pre-push of .ergon.yaml lists.
+      - id: check
+        name: make check
+        entry: make check
+        language: system
+        pass_filenames: false
+        stages: [pre-push]
+
+      # The commit message, against .commitlint.yaml. The command of the key ergon of the section
+      # common of .ergon.yaml installs the commitlint of the section, and checks its archive against
+      # the digest of the section.
+      - id: commitlint
+        name: commitlint
+        entry: ergon tool run common.commitlint -- lint --message
+        language: system
+        stages: [commit-msg]

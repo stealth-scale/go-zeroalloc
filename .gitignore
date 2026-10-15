@@ -1,0 +1,36 @@
+# Managed by ergon init. Add repository settings to .ergon/local/.gitignore and run ergon init sync.
+
+# Editors and IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Agents
+.claude/
+.codex/
+.gemini/
+AGENT.md
+CLAUDE.md
+GEMINI.md
+
+# Operating systems
+.DS_Store
+Thumbs.db
+
+# Secrets
+.env
+*.local
+secrets.json
+
+# ergon release
+# The publish plan of the release workflow, which a build of a release must not see as a change
+/publish-plan.json
+
+# Go
+bin/
+coverage.out
+*.test
+# The artifacts of ergon release pack, which a build of a release must not see as changes
+/dist/

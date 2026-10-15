@@ -1,0 +1,48 @@
+# Managed by ergon init. Add repository settings to .ergon/local/.markdownlint.yml and run ergon init sync.
+#
+# The rules: https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md
+
+# A blank line inside a list item may keep the indentation of the item. The release flow writes the
+# changelogs that way.
+MD009:
+  list_item_empty_lines: true
+
+# Hard tabs are allowed in fenced code blocks, because a tab-indented language is shown as it is
+# written. Prose still may not contain them.
+MD010:
+  code_blocks: false
+
+# Line length is not checked: tables, code blocks and URLs exceed any wrap point.
+MD013: false
+
+# Headings may repeat, as "### Fixed" does in every release of a changelog.
+MD024: false
+
+# A second top-level heading is allowed, as front matter generates one.
+MD025: false
+
+# A heading may end in a question mark.
+MD026:
+  punctuation: ".,;:!"
+
+# Inline HTML is allowed, for badges and aligned tables.
+MD033: false
+
+# Bare URLs are allowed in changelogs and link lists.
+MD034: false
+
+# A bold line is not taken for a heading.
+MD036: false
+
+# A fenced code block needs no language, as a directory tree has none.
+MD040: false
+
+# The first line need not be a heading, because front matter and comments precede it.
+MD041: false
+
+# Code blocks are fenced.
+MD046:
+  style: fenced
+
+# Table columns need no padding.
+MD060: false
